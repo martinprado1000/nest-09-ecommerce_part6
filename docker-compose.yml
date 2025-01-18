@@ -2,13 +2,13 @@ version: '3'
 
 services:
   db:
-    container_name: db_postgres-nest_04_ecommerce
+    container_name: nest_04_ecommerce
     image: postgres:14.3
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_NAME: ${DATABASE_NAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     volumes:
       - ./postgres:/var/lib/postgresql/data
