@@ -12,15 +12,19 @@ import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { validate as isUUID } from 'uuid';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ProductsService {
   private readonly logger = new Logger('ProductsService'); // Genera un logger para este servicio.
-
+  private defaultLimit:number;
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
-  ) {}
+    private readonly configService: ConfigService,
+  ) {
+    this.defaultLimit = configService.get<number>('pagination.defaultLimit')
+  }
 
   async create(createProductDto: CreateProductDto) {
     try {
@@ -34,7 +38,7 @@ export class ProductsService {
 
   async findAll(paginationDto: PaginationDto) {
     try {
-      const { limit = 10, offset = 0 } = paginationDto;
+      const { limit = this.defaultLimit, offset = 0} = paginationDto
       const product = await this.productRepository.find({
         take: limit,
         skip: offset,

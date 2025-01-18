@@ -64,6 +64,19 @@ docker-compose -f docker-compose.prod.yaml --env-file .env.prod up -d
 ```
 
 
+### Esta aplicacion es para administrar prdcutos.
+Configuraciones:
+
+Entidades: productos
+
+.env  .env.template  .env.prod.
+
+ConfigModule,ConfigService,Joi.
+
+Solo configuración de la db en docker.
+
+
+
 
 
 
