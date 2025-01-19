@@ -1,4 +1,12 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ProductImage } from '.';
 
 @Entity()
 export class Product {
@@ -49,29 +57,34 @@ export class Product {
   @Column('text')
   gender: string;
 
-  @Column('text',{
-    array:true,
-    default:[]
+  @Column('text', {
+    array: true,
+    default: [],
   })
   tags: string[];
 
+  @OneToMany(() => ProductImage, (productImage) => productImage.product, {    // @OneToMany: indica la relacion uno a muchos
+    cascade: true, // Elimina las imagenes que estan asocioadas al producto
+  })
+  images?: ProductImage[];
+
   @BeforeInsert() // @BeforeInsert: Se ejecuta antes de insertar un dato en la db
   checkSlugInsert() {
-    if (!this.slug) { // Si el slug no viene lo igualo al titulo y le saco carateres especiales. this hace referencia al slug de este scope.
+    if (!this.slug) {
+      // Si el slug no viene lo igualo al titulo y le saco carateres especiales. this hace referencia al slug de este scope.
       this.slug = this.title;
     }
     this.slug = this.slug
       .toLowerCase()
-      .replaceAll(' ','_')
-      .replaceAll("'",'');
+      .replaceAll(' ', '_')
+      .replaceAll("'", '');
   }
 
   @BeforeUpdate() // @BeforeUpdate: Se ejecuta antes de actualizar un dato en la db
   checkSlugUpdate() {
     this.slug = this.slug
       .toLowerCase()
-      .replaceAll(' ','_')
-      .replaceAll("'",'');
+      .replaceAll(' ', '_')
+      .replaceAll("'", '');
   }
-
 }

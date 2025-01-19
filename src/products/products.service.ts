@@ -9,10 +9,10 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Product } from './entities/product.entity';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { validate as isUUID } from 'uuid';
 import { ConfigService } from '@nestjs/config';
+import { Product, ProductImage } from './entities';
 
 @Injectable()
 export class ProductsService {
@@ -21,16 +21,34 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+
+    @InjectRepository(ProductImage)
+    private readonly productImageRepository: Repository<ProductImage>,
+
     private readonly configService: ConfigService,
   ) {
     this.defaultLimit = configService.get<number>('pagination.defaultLimit')
   }
 
   async create(createProductDto: CreateProductDto) {
+    console.log(createProductDto)
     try {
-      const product = this.productRepository.create(createProductDto); // Creamos el registro
-      await this.productRepository.save(product); // Guarda en la db
-      return product;
+
+      // const product = this.productRepository.create(createProductDto);   // Creamos el registro 
+      // Como ahora vamos a guardar el producto en la db producto y las imagenes en la otra db lo tenemos que guardar de la siguiente manera:
+      
+      const { images = [], ...productDetails } = createProductDto;  // Destructura el objeto de la siguiente manera: Si las imagenes no viene le asigna un array vacio. Operador Rest: ...productDetails: esto lo que hace es que todos los demas datos queden en productDetails.
+      
+      const product = this.productRepository.create({
+        ...productDetails,    // Operador Spread: estraigo los datos
+        images: images.map( image => this.productImageRepository.create({url:image})
+        )
+      });
+      // TypeORM infiere que como estoy creando imagenes dentro de la creacion de un producto, ese id es que le va a asignar a cada una de las imagenes para hace la relación. 
+      // Luego salva todo de una sola vez porque las imagenes se encuentran dentro del producto.
+      await this.productRepository.save(product);                       // Guarda en la db
+      return { ... product, images }  // Retorno asi para que no retornar el id de las imagenes.
+      ;
     } catch (error) {
       this.handleExceptions(error);
     }
@@ -73,6 +91,7 @@ export class ProductsService {
     const product = await this.productRepository.preload({
       id,
       ...updateProductDto,
+      images:[]
     });
 
     if (!product)

@@ -2,7 +2,7 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-# Nest-05-ecommerce_part2
+# Nest-04-ecommerce
 
 ## Stack usado
 
@@ -11,14 +11,18 @@
 *Postgres
 
 
-# Ejecutar en desarrollo
-1. Clonar el repositorio y asignamos al nuevo repo ya creado en git
+# Clonar el repositorio para editar.
+-Clonar el repositorio y asignamos al nuevo repo ya creado en git
 ```bash
-git clone https://github.com/martinprado1000/Nest-04-ecommerce.git nuevoNombre
+#Recordar cambiar el nombre del proyecto en package.json
+
+git clone https://github.com/martinprado1000/nest-05-ecommerce_part2.git nuevoNombre
 
 git remote set-url origin https://github.com/martinprado1000/nuevoNombre.git
-```
 
+```
+# Ejecutar en desarrollo.
+1. Clonar el repositorio.
 2. Tener Nest CLI instalado:
 ```bash
 npm i -g @nest/cli

@@ -5,6 +5,8 @@ import { envSchema } from './appConfig/envSchema.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
 import { CommonModule } from './common/common.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
 
@@ -28,6 +30,10 @@ import { CommonModule } from './common/common.module';
       password: process.env.DATABASE_PASSWORD,      
       autoLoadEntities: true, // Carga automaticamente las entidades
       synchronize: true,      // Si hay un cambio en la base de datos toma esos cambio. No se suele dejar en producción.
+    }),
+
+    ServeStaticModule.forRoot({  // Indicamos la ruta de nuestras archivos publicos
+      rootPath: join(__dirname,'..','public'), 
     }),
 
     ProductsModule,

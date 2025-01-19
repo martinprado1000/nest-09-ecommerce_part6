@@ -32,16 +32,21 @@ export class CreateProductDto {
   @IsPositive()
   stock: number;
 
-  @IsString({ each: true }) // each:true  indica que cada el elmento de ese arreglo tiene que ser un string
   @IsArray()
+  @IsString({ each: true }) // each:true  indica que cada el elmento de ese arreglo tiene que ser un string
   sizes: string[];
 
   @IsIn(['men', 'women', 'kid', 'unisex'])
   gender: string;
 
-  @IsString({ each: true })
-  @IsArray()
   @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
   tags: string[];
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true }) // each:true  indica que cada el elmento de ese arreglo tiene que ser un string
+  images?: string[];
 
 }
