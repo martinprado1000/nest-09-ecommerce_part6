@@ -74,6 +74,8 @@ Configuraciones:
 
 * Creamos una segunda tabla relacionada para las imagenes, la eliminacion se hizo con queryRunner ( elimina si todo salio bien sino hace un rollback)
 
+aasdas
+
 
 
 
