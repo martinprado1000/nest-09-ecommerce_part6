@@ -41,8 +41,8 @@ docker-compose up -d
 # Esto ejecuta el archivo docker.compose.yml
 $ npm run star:dev
 
-# Ejecutar seed de Pokemons ,inserta multiples datos.
-http://localhost:3000/seed/pokemons/multiplesRegistros2
+# Ejecutar seed de Productos, elimina los datos e inserta multiples datos.
+http://localhost:3000/api/seed
 ```
 
 
@@ -55,31 +55,24 @@ $ npm run build
 $ npm run start:prod
 ```
 
-# Construir y ejecutar para producción la app y la base en mongo DOCKERIZADO
-
-1. Renombrar el archivo __.env.template__ por __.env.prod__ y llenar las variables de entorno.
-
-2. Crear las imagenes
-```bash
-# Usamos el docker-compose.prod.yaml y el .env.prod que son los de produccón.
-
-docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
-
-# Si las imagenes ya fueron creadas y solo necesitamos levantar ejecutar:
-docker-compose -f docker-compose.prod.yaml --env-file .env.prod up -d
-```
-
-
-### Esta aplicacion es para administrar prdcutos.
+### Esta aplicacion es para administrar prodcutos.
 Configuraciones:
 
-Entidades: productos
+* Entidades: productos, seed
 
-.env  .env.template  .env.prod.
+* .env  .env.template  .env.prod.
 
-ConfigModule,ConfigService,Joi.
+* ConfigModule,ConfigService,Joi.
 
-Solo configuración de la db en docker.
+* Paginación.
+
+* Solo configuración de la db en docker.
+
+--Es la parte 2 del ecommerce.--
+
+* Aplanamos el retorno de las imagenes.
+
+* Creamos una segunda tabla relacionada para las imagenes, la eliminacion se hizo con queryRunner ( elimina si todo salio bien sino hace un rollback)
 
 
 

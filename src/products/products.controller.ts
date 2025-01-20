@@ -20,8 +20,8 @@ export class ProductsController {
   }
 
   @Get(':term') // term:  temino de busqueda, lo hago asi porque no solo vamos a buscar por el id
-  findOne(@Param('term') term: string) {
-    return this.productsService.findOne(term);
+  findOne(@Param('term') term: string) {  // En vez de usar findOne uso el metodo findOnePlane que retorna el metodo plano.
+    return this.productsService.findOnePlane(term);
   }
 
   @Patch(':id')

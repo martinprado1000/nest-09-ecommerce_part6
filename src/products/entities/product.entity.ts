@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { ProductImage } from '.';
 
-@Entity()
+@Entity()   // @Entity( {name: 'productos_de_tesla' } )  Asi podria asignarle una nombre a la tabla por si no quiero que la tabla tomo automatico el de la entidad.
 export class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -22,7 +22,7 @@ export class Product {
 
   // Esta sintaxis es lo mismo que la de arriba
   // @Column({
-  //     type:'text', // text es el tipo de dato que le estoy asignando en la base de Postgres,
+  //     type:'text,
   //     unique:true,
   //     nullable: true
   // })
@@ -63,8 +63,9 @@ export class Product {
   })
   tags: string[];
 
-  @OneToMany(() => ProductImage, (productImage) => productImage.product, {    // @OneToMany: indica la relacion uno a muchos
-    cascade: true, // Elimina las imagenes que estan asocioadas al producto
+  @OneToMany(() => ProductImage, (productImage) => productImage.product, { // @OneToMany: indica la relacion uno a muchos contra la tabla productImage, y crea automatico la fila productId.
+    cascade: true,  // Elimina las imagenes que estan asocioadas al producto
+    eager: true,    // Esto hace que el si se hace un busqueda con quearyer metodo find* lo retorne con su relacion si tiene.
   })
   images?: ProductImage[];
 

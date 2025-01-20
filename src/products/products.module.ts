@@ -13,6 +13,10 @@ import { Product, ProductImage } from './entities';
   imports: [
     ConfigModule,
     TypeOrmModule.forFeature([Product,ProductImage]) 
+  ],
+  exports: [
+    ProductsService,
+    TypeOrmModule   // Generalmente tambien se exporta el TypeOrmModule  del modulo para usar en otro lado.
   ]
 })
 export class ProductsModule {}
