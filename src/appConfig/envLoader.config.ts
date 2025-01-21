@@ -1,6 +1,7 @@
 export const envLoader = () => ({
         environment: process.env.NODE_ENV,
         port: +process.env.PORT,
+        hostApi: process.env.HOST_API,
         database: {
             uri: process.env.DATABASE_URI,
             username: process.env.DATABASE_USERNAME,

@@ -8,6 +8,7 @@ import { CommonModule } from './common/common.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SeedModule } from './seed/seed.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
 
@@ -42,6 +43,8 @@ import { SeedModule } from './seed/seed.module';
     CommonModule,
 
     SeedModule,
+
+    FilesModule,
 
   ],
 })

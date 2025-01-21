@@ -20,6 +20,8 @@ git clone https://github.com/martinprado1000/nest-05-ecommerce_part2.git nuevoNo
 
 git remote set-url origin https://github.com/martinprado1000/nuevoNombre.git
 
+git install
+
 ```
 # Ejecutar en desarrollo.
 1. Clonar el repositorio.
@@ -32,9 +34,14 @@ npm i -g @nest/cli
 
 ```bash
 docker-compose up -d
+#Para Postgres recordar crear la base de datos a mono porque no la crea sola
 ```
 
-4. Renombrar el archivo __.env.template__ por __.env__ y llenar las variables de entorno.
+4. Renombrar el archivo __.env.template__ por __.env__ y llenar las variables de entorno e instalar las dependencias:
+```bash
+#Instalar dependencias
+git install
+```
 
 5. Ejecutar en desarrollo
 ```bash
@@ -70,11 +77,13 @@ Configuraciones:
 
 --Es la parte 2 del ecommerce.--
 
-* Aplanamos el retorno de las imagenes.
+* Aplanamos el los nombres de retorno de las url.
 
 * Creamos una segunda tabla relacionada para las imagenes, la eliminacion se hizo con queryRunner ( elimina si todo salio bien sino hace un rollback)
 
-aasdas
+* Subimos archivo a file sistem, carpeta static. ** Implementa archivo .gitkeep (Es para que git le de seguimiento a esa carpeta aunque este vacia)**
+
+
 
 
 
