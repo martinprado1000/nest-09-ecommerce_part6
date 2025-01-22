@@ -41,10 +41,10 @@ export class FilesController {
     fileFilter: fileFilter,           // 2- La funcion que creamos con la cual vamos a interceptar lo enviado. Esta es mi funcion que fintra el archivo. Eso solo indica si permite o no el archivo.
      // 3- Configuraciones
     limits: {                        
-      fileSize: 10000000000000
+      fileSize: 5 * 1024 * 1024  //5Mb
     },
     storage: diskStorage({
-      destination: './static/uploads',
+      destination: './static/products',
       filename: fileNamer             // renombro el archivo con mi funcion. Asignamdole una nueba propiedad filename
     }) 
                  
@@ -57,7 +57,7 @@ export class FilesController {
         throw new BadRequestException('The image must be an image')
       }
     
-      const secureUrl = this.configService.get<string>('hostApi')
+      const secureUrl = `${this.configService.get<string>('hostApi')}/files/product/${file.filename}` // Generamos una url amigable con el nombre del archivo.
     
     return { secureUrl };
   }

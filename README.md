@@ -81,7 +81,9 @@ Configuraciones:
 
 * Creamos una segunda tabla relacionada para las imagenes, la eliminacion se hizo con queryRunner ( elimina si todo salio bien sino hace un rollback)
 
-* Subimos archivo a file sistem, carpeta static. ** Implementa archivo .gitkeep (Es para que git le de seguimiento a esa carpeta aunque este vacia)**
+* Subimos archivo a file sistem, carpeta static.
+Al subir los archivos a la carpeta static estan protegidos y los podemos controllar desde los endpoitn con decoradores de autenticación. Estando en la carpeta public son accesibles ingresando la ruta.
+ ** Esta carpeta implementa archivo .gitkeep (Es para que git le de seguimiento a esa carpeta aunque este vacia)**
 
 
 

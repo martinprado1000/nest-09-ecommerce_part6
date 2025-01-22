@@ -7,7 +7,7 @@ export class FilesService {
   
   // Este metodo chequea si existe ese nombre de imagen para retornar el path completo
   getStaticProducImage( imageName: string) {
-    const path = join( __dirname, '../../static/uploads', imageName);
+    const path = join( __dirname, '../../static/products', imageName);
     //console.log(path)
     if (!existsSync(path))
       throw new BadRequestException(`Not found product with name ${imageName}`);
