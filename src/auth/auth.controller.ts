@@ -84,6 +84,7 @@ export class AuthController {
   // por el decorador personalizado que une los 2.
   // por lo tanto este hace la validacion de passport, el guard de passport y la autorizacion de roles.
   @Get('private3')
+  //@Auth()  // Si lo dejara vacio podria cualquier rol acceder paro si o si tiene que estar autenticado porque esto involucra el guar de jwt.
   @Auth(ValidRoles.admin)
   privateRoute3(@GetUser() user: User) {
     return {
