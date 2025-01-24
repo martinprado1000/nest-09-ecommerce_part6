@@ -1,4 +1,5 @@
 export const envLoader = () => ({
+        jwt_secret: process.env.JWT_SECRET,
         environment: process.env.NODE_ENV,
         port: +process.env.PORT,
         hostApi: process.env.HOST_API,

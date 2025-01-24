@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    container_name: container_nest-06-ecommerce_part3
+    container_name: container_nest-07-ecommerce_part4
     image: postgres:14.3
     restart: always
     ports:

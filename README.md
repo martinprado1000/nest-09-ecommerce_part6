@@ -34,7 +34,9 @@ npm i -g @nest/cli
 
 ```bash
 docker-compose up -d
-#Para Postgres recordar crear la base de datos a mono porque no la crea sola
+#Para Postgres recordar crear la base de datos a mono porque no la crea sola.
+# Comando para chequear que este corriendo:
+# sudo netstat -tulnp | grep postgres
 ```
 
 4. Renombrar el archivo __.env.template__ por __.env__ y llenar las variables de entorno e instalar las dependencias:

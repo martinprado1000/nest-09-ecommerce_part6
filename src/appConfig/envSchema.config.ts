@@ -7,6 +7,7 @@ export const envSchema = Joi.object({
   PORT: Joi.number().default(3000), // Asigno por default en 3000 en el caso que no lo pasen
   HOST_API: Joi.string().required(),
   NODE_ENV: Joi.string().default('dev'),
+  JWT_SECRET: Joi.string().required(),
   DATABASE_URI: Joi.string().required(),
   DATABASE_USERNAME: Joi.string().allow('', null),
   DATABASE_PASSWORD: Joi.string().allow('', null),
