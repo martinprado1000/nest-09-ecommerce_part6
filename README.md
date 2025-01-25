@@ -16,7 +16,7 @@
 ```bash
 #Recordar cambiar el nombre del proyecto en package.json
 
-git clone https://github.com/martinprado1000/nest-06-ecommerce_part3.git nuevoNombre
+git clone https://github.com/martinprado1000/nest-07-ecommerce_part4.git nuevoNombre
 
 git remote set-url origin https://github.com/martinprado1000/nuevoNombre.git
 
