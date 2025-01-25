@@ -21,8 +21,8 @@ git clone https://github.com/martinprado1000/nest-08-ecommerce_part5.git nuevoNo
 git remote set-url origin https://github.com/martinprado1000/nuevoNombre.git
 
 git install
-
 ```
+
 # Ejecutar en desarrollo.
 1. Clonar el repositorio.
 2. Tener Nest CLI instalado:
@@ -54,6 +54,9 @@ $ npm run star:dev
 http://localhost:3000/api/seed
 ```
 
+Documentacio Swagger:
+http://localhost:3000/api#
+<br></br>
 
 # Construir y ejecutar para producción
 ```bash
@@ -97,6 +100,9 @@ jwt - passport - @decoradores - @guards - rutas protegidas - renobacion de token
 
 @GetUser() user: User
 ```
+
+* OpenApi-Documentación Swagger: endpoints, entities, dto.
+
 
 
 

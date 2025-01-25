@@ -6,13 +6,20 @@ import { PaginationDto } from 'src/common/dtos/pagination.dto';
 import { Auth, GetUser } from 'src/auth/decorators';
 import { User } from '../auth/entities/user.entity'; 
 import { ValidRoles } from 'src/auth/interfaces';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Product } from './entities';
 
+//Swagger: @ApiTags('Products') Asi agregaria los tags de swagger, ya lo hace automatico
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
   @Auth()
+  //Swagger: @ApiResponse: respuestas posible
+  @ApiResponse({ status:200, description: 'Product was created', type: Product}) // Type es lo que retorna
+  @ApiResponse({ status:400, description: 'Pad request'})
+  @ApiResponse({ status:403, description: 'Forbidden, token related'})
   create(
     @Body() createProductDto: CreateProductDto,
     @GetUser() user: User

@@ -10,12 +10,23 @@ import {
 } from 'typeorm';
 import { ProductImage } from '.';
 import { User } from '../../auth/entities/user.entity';
+import { ApiProperty } from '@nestjs/swagger';
 
-@Entity()   // @Entity( {name: 'productos_de_tesla' } )  Asi podria asignarle una nombre a la tabla por si no quiero que la tabla tomo automatico el de la entidad.
+@Entity()   // @Entity( {name: 'productos_de_productos' } )  Asi podria asignarle una nombre a la tabla por si no quiero que la tabla tomo automatico el de la entidad.
 export class Product {
+
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'ProductId',
+    example: '5429dc24-f0a1-4654-9ffd-bff20d3c9c6c',
+    uniqueItems: true
+  }) 
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'Titulo del producto',
+    example: 'Remera verde',
+  })
   @Column('text', {
     // text es el tipo de dato que le estoy asignando en la base de Postgres,
     unique: true,
@@ -31,35 +42,64 @@ export class Product {
   // })
   // title:string;
 
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'Precio del producto',
+    example: '0',
+  })
   @Column('float', {
     default: 0,
     nullable: true,
   })
   price: number;
 
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'Descripción del producto',
+    example: 'Remera verde',
+  })
   @Column('text', {
     nullable: true,
   })
   description: string;
 
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'Slug del producto',
+    example: 'Remera_verde',
+  })
   @Column('text', {
     unique: true,
   })
   slug: string; // Un slug es una versión de un título o nombre convertida en una cadena de texto optimizada para URL
 
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'Stock del producto',
+    example: '5',
+    default: 0
+  })
   @Column('int', {
     default: 0,
   })
   stock: number;
 
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'Talles del producto',
+    example: ["XS","S","M","L","XL","XXL"]
+  })
   @Column('text', {
     array: true,
   })
   sizes: string[];
 
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'Género del producto',
+    example: ['men', 'women', 'kid', 'unisex']
+  })
   @Column('text')
   gender: string;
 
+  @ApiProperty({// Swagger: agrega este dato a la respuesta del endpoint
+    description: 'Etiquetas del producto',
+    example: ['remera', 'remerita']
+  })
   @Column('text', {
     array: true,
     default: [],

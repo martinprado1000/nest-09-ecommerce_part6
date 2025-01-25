@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,11 +20,13 @@ async function bootstrap() {
     }
   }));  
 
+  // Swagger
+  // npm i @nestjs/swagger@8.1.1  .La ultima version no es compatible con nest 10.0.0. Asi que se instalo la 8.1.
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('Ecommerce RESTFul API')
+    .setDescription('Ecommerce endpoints')
     .setVersion('1.0')
-    .addTag('cats')
+    //.addTag('Default')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);  
   SwaggerModule.setup('api', app, documentFactory);
