@@ -3,10 +3,13 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ProductImage } from '.';
+import { User } from '../../auth/entities/user.entity';
 
 @Entity()   // @Entity( {name: 'productos_de_tesla' } )  Asi podria asignarle una nombre a la tabla por si no quiero que la tabla tomo automatico el de la entidad.
 export class Product {
@@ -63,11 +66,21 @@ export class Product {
   })
   tags: string[];
 
-  @OneToMany(() => ProductImage, (productImage) => productImage.product, { // @OneToMany: indica la relacion uno a muchos contra la tabla productImage, y crea automatico la fila productId.
+  // Este genera la columana productId en la tabla product_image
+  @OneToMany(() => ProductImage, 
+    (productImage) => productImage.product, { // @OneToMany: indica la relacion uno a muchos contra la tabla productImage, y crea automatico la fila productId.
     cascade: true,  // Elimina las imagenes que estan asocioadas al producto
-    eager: true,    // Esto hace que el si se hace un busqueda con quearyer metodo find* lo retorne con su relacion si tiene.
+    eager: true,    // // Esto hace que si se hace un busqueda con cuealquier metodo find* lo retorne con su relacion.
   })
   images?: ProductImage[];
+
+  // Este genera la columana userId en esta tabla.
+  @ManyToOne(   // @OneToMany: indica la relacion muchos a uno.
+    () => User, // Aca va a que entidad a la que hace referncia la union, osea la tabla user.
+    ( user ) => user.product, // esta seria la columna de esa entidad,
+    { eager: true }    // Esto hace que si se hace un busqueda con cuealquier metodo find* lo retorne con su relacion.
+  )
+  user: User
 
   @BeforeInsert() // @BeforeInsert: Se ejecuta antes de insertar un dato en la db
   checkSlugInsert() {

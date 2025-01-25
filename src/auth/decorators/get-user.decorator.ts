@@ -10,7 +10,8 @@ export const GetUser = createParamDecorator(        // createParamDecorator: cre
         //console.log(user)
 
         if ( !user )
-            throw new InternalServerErrorException('User not found (request)');  // Si obtenemos este error es porque tenemos un error en el backend porque llego hasta aqui sin autorizar un token.
+            throw new InternalServerErrorException('User not found (request)');  
+            // Si obtenemos este error es porque tenemos un error en el backend porque llego hasta aqui sin autorizar un token.
 
         return ( !data ) 
             ? user 

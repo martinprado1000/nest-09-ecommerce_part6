@@ -26,7 +26,8 @@ export class UserRoleGuard implements CanActivate {
         
     // Para lo de acontinuacion la metadata fua agregada con el decorador personalizado @RoleProtected.
     const validRoles: string[] = this.reflector.get( META_ROLES, context.getHandler() ) // Obtenemos los roles.
-    
+    //console.log(validRoles)
+
     // Las siguiente 2 validaciones es para que si no vienen los rolos cuando llamamos al guard es porque no lo necesita asique los dejamos pasar.
     if ( !validRoles ) return true;
     if ( validRoles.length === 0 ) return true;

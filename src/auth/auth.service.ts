@@ -68,6 +68,15 @@ export class AuthService {
       };
   }
 
+  // Este metodo es para revalidarle el jwt en el caso que este validado pero pierda en token en un refresco de pantalla.
+  async checkAuthStatus( user: User ){
+    return {
+      ...user,
+      token: this.getJwtToken({ id: user.id })
+    };
+
+  }
+
   // Este es nuestro metodo que genera el token
   private getJwtToken ( payload: JwtPayload ) {
     const token = this.jwtService.sign( payload )

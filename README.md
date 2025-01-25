@@ -50,7 +50,7 @@ git install
 # Esto ejecuta el archivo docker.compose.yml
 $ npm run star:dev
 
-# Ejecutar seed de Productos, elimina los datos e inserta multiples datos.
+# Ejecutar seed de Users y Productos, elimina los datos e inserta multiples datos.
 http://localhost:3000/api/seed
 ```
 
@@ -77,8 +77,6 @@ Configuraciones:
 
 * Solo configuración de la db en docker.
 
---Es la parte 2 del ecommerce.--
-
 * Aplanamos el los nombres de retorno de las url.
 
 * Creamos una segunda tabla relacionada para las imagenes, la eliminacion se hizo con queryRunner ( elimina si todo salio bien sino hace un rollback)
@@ -86,6 +84,19 @@ Configuraciones:
 * Subimos archivo a file sistem, carpeta static.
 Al subir los archivos a la carpeta static estan protegidos y los podemos controllar desde los endpoitn con decoradores de autenticación. Estando en la carpeta public son accesibles ingresando la ruta.
  ** Esta carpeta implementa archivo .gitkeep (Es para que git le de seguimiento a esa carpeta aunque este vacia)**
+
+* En este punto hacemos todo lo relacionado a base de datos de usuarios, auteticacion y autorización:
+
+jwt - passport - @decoradores - @guards - rutas protegidas - renobacion de token.
+```bash
+## Para proteger una ruta lo hacemos con:
+
+@Auth(ValidRoles.admin)  #Elegir el rol para dicha ruta.
+
+## Si la ruta esta protegida y el usuario pudo acceder es porque ya fue validado, por lo tanto con el decorador de parametro obtenemos el usuario:
+
+@GetUser() user: User
+```
 
 
 

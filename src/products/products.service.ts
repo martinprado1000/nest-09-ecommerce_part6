@@ -5,15 +5,17 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
+
+import { DataSource, Repository } from 'typeorm';
+import { validate as isUUID } from 'uuid';
+
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
 import { PaginationDto } from 'src/common/dtos/pagination.dto';
-import { validate as isUUID } from 'uuid';
-import { ConfigService } from '@nestjs/config';
 import { Product, ProductImage } from './entities';
-import { timeInterval } from 'rxjs';
+import { User } from '../auth/entities/user.entity';
 
 @Injectable()
 export class ProductsService {
@@ -33,19 +35,21 @@ export class ProductsService {
     this.defaultLimit = configService.get<number>('pagination.defaultLimit');
   }
 
-  async create(createProductDto: CreateProductDto) {
+  async create(createProductDto: CreateProductDto, user: User) {
     try {
       // const product = this.productRepository.create(createProductDto);   // Creamos el registro
       // Como ahora vamos a guardar el producto en la db producto y las imagenes en la otra db lo tenemos que guardar de la siguiente manera:
 
       const { images = [], ...productDetails } = createProductDto; // Destructura el objeto de la siguiente manera: Si las imagenes no viene le asigna un array vacio. Operador Rest: ...productDetails: esto lo que hace es que todos los demas datos queden en productDetails.
 
+      //console.log(user)
       const product = this.productRepository.create({
-        ...productDetails, // Operador Spread: estraigo los datos
-        images: images.map((image) =>
-          this.productImageRepository.create({ url: image }),
+        ...productDetails,      // Operador Spread: estraigo los datos
+        user,                   // Le pasamos el user logueado para generar el userId de creacion del producto.
+        images: images.map((image) => this.productImageRepository.create({ url: image }),  // OJO el orden, el create tiene que estar al final.
         ),
       });
+      
       // TypeORM infiere que como estoy creando imagenes dentro de la creacion de un producto, ese id es que le va a asignar a cada una de las imagenes para hace la relación.
       // Luego salva todo de una sola vez porque las imagenes se encuentran dentro del producto.
       await this.productRepository.save(product); // Guarda en la db
@@ -105,7 +109,7 @@ export class ProductsService {
     return productPlane
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: UpdateProductDto, user: User) {
     // En el update si viene una o mas imagenes vamos a borrar todas y guardar las nuevas.
 
     const { images, ...restToUpdate } = updateProductDto
@@ -127,12 +131,13 @@ export class ProductsService {
           image => this.productImageRepository.create({url:image}) // Guardo las imagener
         )
       }
-      
-    await queryRunner.manager.save(product);  // Aca indica que termina la operacion queryRunner
-    await queryRunner.commitTransaction();    // Aca aplica la transaccion
-    await queryRunner.release()               // Aca Limpia el cueryRynner
+    
+      product.user = user;  // Le pasamos el user logueado para generar el userId cuando actualice el producto.
+      await queryRunner.manager.save(product);  // Aca indica que termina la operacion queryRunner
+      await queryRunner.commitTransaction();    // Aca aplica la transaccion
+      await queryRunner.release()               // Aca Limpia el cueryRynner
 
-    return this.findOnePlane(id)  // Como lo primero que hice en el update fue 
+      return this.findOnePlane(id)  // Como lo primero que hice en el update fue 
       
       
       //return await this.productRepository.save(product);

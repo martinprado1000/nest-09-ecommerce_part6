@@ -40,6 +40,15 @@ export class AuthController {
     return this.authService.login(loginUserDto);
   }
 
+  // Revalida el token que nos envian y lo renueva. Para el caso que el usuario renueve la aplicacion y le siga asignando un token.
+  @Get('check-status')
+  @Auth()
+  checkAuthStatus(
+    @GetUser() user: User
+  ) {
+    return this.authService.checkAuthStatus( user );
+  }
+
   @Get('private')
   @UseGuards(
     // UseGuards: Incorpora una lista de Guards. Dentro de aca incorporamos guards que puden ser llamados con el @ o no, eso depende del tipo de guard

@@ -32,10 +32,11 @@ export class User {
     })
     roles: string[];
 
-    // @OneToMany(
-    //     () => Product,
-    //     //( product ) => product.user
-    // )
+    // Este genera la columana userId en la tabla product
+    @OneToMany(
+        () => Product, // Aca va a entidad a la que hace referncia la union, osea la tabla products.
+        ( product ) => product.user // esta seria la columna de esa entidad, user
+    )
     product: Product;
 
 
