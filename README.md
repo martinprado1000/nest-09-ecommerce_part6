@@ -30,6 +30,12 @@ git install
 npm i -g @nest/cli
 ```
 
+4. Renombrar el archivo __.env.template__ por __.env__ y llenar las variables de entorno e instalar las dependencias:
+```bash
+#Instalar dependencias
+git install
+```
+
 3. Levantar la base de datos
 
 ```bash
@@ -37,12 +43,6 @@ docker-compose up -d
 #Para Postgres recordar crear la base de datos a mono porque no la crea sola.
 # Comando para chequear que este corriendo:
 # sudo netstat -tulnp | grep postgres
-```
-
-4. Renombrar el archivo __.env.template__ por __.env__ y llenar las variables de entorno e instalar las dependencias:
-```bash
-#Instalar dependencias
-git install
 ```
 
 5. Ejecutar en desarrollo
