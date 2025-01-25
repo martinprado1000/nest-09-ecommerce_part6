@@ -21,12 +21,12 @@ async function bootstrap() {
   }));  
 
   // Swagger
-  // npm i @nestjs/swagger@8.1.1  .La ultima version no es compatible con nest 10.0.0. Asi que se instalo la 8.1.
+  // En la version nueva los tags se cargan automaticamente.
   const config = new DocumentBuilder()
     .setTitle('Ecommerce RESTFul API')
     .setDescription('Ecommerce endpoints')
     .setVersion('1.0')
-    //.addTag('Default')
+    //.addTag('Default') // Esto lo hace automatico en la nueva version, agrega el tag correspondiente al endpoint.
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);  
   SwaggerModule.setup('api', app, documentFactory);
