@@ -16,7 +16,7 @@
 ```bash
 #Recordar cambiar el nombre del proyecto en package.json
 
-git clone https://github.com/martinprado1000/nest-08-ecommerce_part5.git nuevoNombre
+git clone https://github.com/martinprado1000/nest-09-ecommerce_part6.git nuevoNombre
 
 git remote set-url origin https://github.com/martinprado1000/nuevoNombre.git
 
@@ -80,13 +80,19 @@ Configuraciones:
 
 * Solo configuración de la db en docker.
 
+* --------------------- Part 2 ------------------------------ 
+
 * Aplanamos el los nombres de retorno de las url.
 
 * Creamos una segunda tabla relacionada para las imagenes, la eliminacion se hizo con queryRunner ( elimina si todo salio bien sino hace un rollback)
 
+* --------------------- Part 3 ------------------------------ 
+
 * Subimos archivo a file sistem, carpeta static.
 Al subir los archivos a la carpeta static estan protegidos y los podemos controllar desde los endpoitn con decoradores de autenticación. Estando en la carpeta public son accesibles ingresando la ruta.
  ** Esta carpeta implementa archivo .gitkeep (Es para que git le de seguimiento a esa carpeta aunque este vacia)**
+
+* --------------------- Part 4 ------------------------------ 
 
 * En este punto hacemos todo lo relacionado a base de datos de usuarios, auteticacion y autorización:
 
@@ -101,9 +107,9 @@ jwt - passport - @decoradores - @guards - rutas protegidas - renobacion de token
 @GetUser() user: User
 ```
 
-* OpenApi-Documentación Swagger: endpoints, entities, dto.
+* --------------------- Part 5 ------------------------------ 
 
-
+OpenApi-Documentación Swagger: endpoints, entities, dto.
 
 
 
