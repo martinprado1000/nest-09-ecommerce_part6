@@ -27,6 +27,7 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/passport": "^11.0.4",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-socket.io": "^10.4.15",
     "@nestjs/serve-static": "^4.0.2",
     "@nestjs/swagger": "^8.1.1",
     "@nestjs/typeorm": "^10.0.2",
@@ -40,6 +41,7 @@
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
+    "socket.io": "^4.8.1",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {

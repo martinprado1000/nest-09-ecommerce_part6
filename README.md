@@ -111,7 +111,9 @@ jwt - passport - @decoradores - @guards - rutas protegidas - renobacion de token
 
 OpenApi-Documentación Swagger: endpoints, entities, dto.
 
+* --------------------- Part 6 ------------------------------ 
 
+WebSockets. No lo continue porque necesito la parte del front. En stop por el momento.
 
 
 
