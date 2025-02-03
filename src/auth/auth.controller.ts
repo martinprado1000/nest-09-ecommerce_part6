@@ -59,7 +59,7 @@ export class AuthController {
     // Aca se llaman los decoradores de parametros.
     // @Req() request:Express.Request,          // Asi podriamos acceder a la request pero lo hacemos de la siguiente manera
     @GetUser() user: User, // Decorador pers de parametros que extre el usuario del contexto. En el decorador explicacion de porque esxtraemos aca el req.
-    @EmailTest('email') email: User, // Decorador pers de practica, si no le mando el parametro email no lo paso. Podria pasar un arreglo si quiero.
+    @EmailTest('email') email: User, // Decorador pers de practica, si paso el parametro email responde una cosa u otra. Podria pasar un arreglo si quiero.
     @HeadersTest('email') headersTest: string[], // Decorador pers de practica, obtengo los headers
     @Headers() headers: IncomingHttpHeaders, // Decorador propio de nest para obtener los headers
   ) {
@@ -77,10 +77,10 @@ export class AuthController {
   @Get('private2')
   // ** DECORADORES DE METODO **
   //@SetMetadata('rolesTest',['admin','super-admin'])     // Decorador de practica. Este deco de metadata es propio de nest, Es para agregar informacion y luego accederla desde un decorador. Accedemos a esta metadata en el guard UserRoleGuard para chequear el rol de usuario.
-  @RoleProtected(ValidRoles.admin, ValidRoles.superUser) // Decorador pers, le pasamos los roles validos para esta ruta. Es lo mismo de lo de arriba pero ahora le pasamos los argumento obtenidos desde un enum y la metadata se agrega a travez de este decorador personalizado.
+  @RoleProtected(ValidRoles.admin, ValidRoles.superUser)  // Decorador pers, le pasamos los roles validos para esta ruta. Es lo mismo de lo de arriba pero ahora le pasamos los argumento obtenidos desde un enum y la metadata se agrega a travez de este decorador personalizado.
   @UseGuards(
-    AuthGuard(), // Este Guard es el de passport y se instacia por eso se lo llama con (), los guards pers como los de acontinuacion no se instacian.
-    UserRoleGuard,
+    AuthGuard(),    // Este Guard es el de passport y se instacia por eso se lo llama con (), los guards pers como los de acontinuacion no se instacian.
+    UserRoleGuard,  // Llamamos a nuestro guard personalizado donde donde permite seguir a la ruta segun la metadata ingresada en el  @RoleProtected.
   )
   testingPrivateRoute2() {
     return {

@@ -54,7 +54,7 @@ $ npm run star:dev
 http://localhost:3000/api/seed
 ```
 
-Documentacio Swagger:
+Documentacion Swagger:
 http://localhost:3000/api#
 <br></br>
 
@@ -111,9 +111,13 @@ jwt - passport - @decoradores - @guards - rutas protegidas - renobacion de token
 
 OpenApi-Documentación Swagger: endpoints, entities, dto.
 
+http://localhost:3000/api#
+
 * --------------------- Part 6 ------------------------------ 
 
 WebSockets. No lo continue porque necesito la parte del front. En stop por el momento.
+
+http://localhost:3000/socket.io/socket.io.js
 
 
 

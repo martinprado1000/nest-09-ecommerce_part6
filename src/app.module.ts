@@ -3,7 +3,7 @@ import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { envLoader } from './appConfig/envLoader.config';
 import { envSchema } from './appConfig/envSchema.config';
